@@ -12,5 +12,6 @@ create table books (
   authors text not null,
   available text not null,
   cover text not null,
-  year integer
+  year integer,
+  category text not null
 );
