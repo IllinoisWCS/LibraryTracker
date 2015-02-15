@@ -30,12 +30,6 @@ Once done, commit the simple text change back to be merged into the master branc
 4. git commit -m "meaningful commit message here"
 5. git push
 
-If you want to get the latest version: 
-
-  git remote add upstream https://github.com/IllinoisWCS/LibraryTracker.git
-
-  git pull upstream master
-
 === Next Steps ====
 
 Sign up for a feature or task to contribute to the project.
@@ -56,6 +50,14 @@ Low Priority:
 - Solvin the problem of unique copies of the same book 
 - Enter a NetID and see First and Last name pulled from the Illinois Directory
 
+==== Update ====
+
+If you want to get the latest version: 
+
+  git remote add upstream https://github.com/IllinoisWCS/LibraryTracker.git
+
+  git pull upstream master
+  
 ==== Contributors ====
 
 - Emily Tran (etran5)
