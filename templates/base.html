@@ -47,56 +47,14 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book here.<br>
 	</div>
 	<div class="quick-stats-box col-md-2">
 		<span class="quick-stats-number">2</span> 
-		<span class="quick-stats-text">Overdue Books</span>
+		<span class="quick-stats-text"><a href="overdue.html">Overdue Books</a></span>
+
 	</div>
 </div>
 
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th></th>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Year</th>
-			<th>Available Books</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-ProgrammingInterviewsExposed.jpg') }}" alt="Programming Interviews Exposed"></td>
-			<td>Programming Interviews Exposed</td>
-			<td>John Mongan, Noah Kindler, and Eric Giguere</td>
-			<td>2000</td>
-			<td>2/2</td>
-		</tr>
-
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-CrackingTheCode.jpg') }}" alt="Cracking the Code"></td>
-			<td>Cracking the Coding Interview: 150 Programming Questions and Solutions</td>
-			<td>Gayle Laakmann McDowell</td>
-			<td>2011</td>
-			<td>0/2</td>
-		</tr>
-
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-LeanIn.jpg') }}" alt="Lean In"></td>
-			<td>Lean In: Women, Work, and the Will to Lead</td>
-			<td>Sheryl Sandberg</td>
-			<td>2013</td>
-			<td>4/6</td>
-		</tr>
-
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-DOET.jpg') }}" alt="Lean In"></td>
-			<td>The Design of Everyday Things</td>
-			<td>Don Norman</td>
-			<td>1988</td>
-			<td>1/1</td>
-		</tr>
-
-	</tbody>
-</table>
-
+{% block content -%}
+{% include "books.html" %}
+{%- endblock content %}
 
 <!--<img class="book-preview-image" src="assets/img/Book-CrackingTheCode.jpg" alt="Cracking the Coding Interview">-->
 </div>
