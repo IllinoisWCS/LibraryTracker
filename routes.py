@@ -50,5 +50,6 @@ def index():
 	books = cur.fetchall()
 	return render_template('index.html', books=books)
 
+
 if __name__ == '__main__':
     app.run()
