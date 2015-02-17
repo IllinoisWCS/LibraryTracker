@@ -1,5 +1,40 @@
 <HTML>
+<head>
+	<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-<p>Hello</p>
+	<title>WCS Library Tracker</title>
+</head>
+<body>
+	<table>
+	<table style="width:100%">
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Checked Out To</th>
+				<th>Days Overdue</th>
+				<th>Email Reminder</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>Programming Interviews Exposed</td>
+				<td>John Mongan, Noah Kindler, and Eric Giquere</td>
+				<td>alding2</td>
+				<td>5</td>
+				<td><a href="">Email</a></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+	</table>
+
+</body>
+
+<!--Book title, author, Person/netID, Days overdue, send reminder email-->
 
 </HTML>
