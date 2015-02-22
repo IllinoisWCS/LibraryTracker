@@ -56,6 +56,10 @@ def index():
 def overdue():
     return render_template('overdue.html')
 
+@app.route('/request')
+def request():
+    return render_template('requestabook.html')
+
 
 if __name__ == '__main__':
     app.run()
