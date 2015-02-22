@@ -54,5 +54,10 @@ def index():
     availableBooks = availableBooks.fetchall()[0][0]
     return render_template('index.html', books=books, counter=counter, availableBooks=availableBooks)
 
+@app.route('/overdue')
+def overdue():
+    return render_template('overdue.html')
+
+
 if __name__ == '__main__':
     app.run()
