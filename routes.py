@@ -45,10 +45,17 @@ def teardown_request(exception):
 
 @app.route('/')
 def index():
-	db = get_db()
-	cur = db.execute('select * from books')
-	books = cur.fetchall()
-	return render_template('index.html', books=books)
+    db = get_db()
+    cur = db.execute('select * from books')
+    counter = db.execute('SELECT COUNT(name) FROM books')
+    counter = counter.fetchall()[0][0]
+    books = cur.fetchall()
+    return render_template('index.html', books=books, counter=counter)
+
+@app.route('/overdue')
+def overdue():
+    return render_template('overdue.html')
+
 
 if __name__ == '__main__':
     app.run()
