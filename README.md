@@ -76,4 +76,5 @@ If you want to get the latest version:
 - Lily Sellers (lseller2)
 - Nathan Handler (nhandle2)
 - Vaishali Khandelwal (vkhande2)
+- Han Chen (hanchen2)
 
