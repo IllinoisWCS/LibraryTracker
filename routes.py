@@ -43,6 +43,17 @@ def teardown_request(exception):
     if db is not None:
         db.close()
 
+@app.route('/request', methods=['POST'])
+def request():
+    return render_template('requestabook.html')
+    
+def add_entry():
+    g.db.execute('insert into entries (title, text) values (? ?)',
+                 [request.form['title'], request.form['text']])
+    g.db.commit()
+    flash('New entry was successfully posted')
+    return redirect(url_for('show_entries'))
+
 @app.route('/')
 def index():
     db = get_db()
@@ -56,10 +67,6 @@ def index():
 def overdue():
     return render_template('overdue.html')
 
-@app.route('/request')
-def request():
-    return render_template('requestabook.html')
-
-
 if __name__ == '__main__':
     app.run()
+
