@@ -14,3 +14,9 @@ create table books (
   cover text not null,
   year integer
 );
+
+drop table if exists requests;
+create table requests(
+bookname text primary key not null,
+
+)
