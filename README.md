@@ -24,6 +24,11 @@ you should make sure you can contribute code via version control.
 The first task is to add your name to the contributor's list. 
 Once done, commit the simple text change back to be merged into the master brance. 
 
+1. On the github website, fork the master LibraryTracker directory. You should now have yourusername/LibraryTracker
+2. Now git clone your version of LibraryTracker to your machine and then use a text editor (sublime or vim) to add your name to the README.md file
+3. git add . 
+4. git commit -m "meaningful commit message here"
+5. git push
 
 === Next Steps ====
 
@@ -31,12 +36,12 @@ Sign up for a feature or task to contribute to the project.
 
 High Priority: 
 
-- Admin login for WCS officers
-- Click to email students with overdue book reminders (Chenying He)
-- Automatically email students with books due in x days 
-- Request a Book
-- Pulling Book Data via Google API for auto-fill 
-- Click to see who has checked out a book
+- Admin login for WCS officers (Brittany Kane, Jenny Cheng)
+- Click to email students with overdue book reminders 
+- Automatically email students with books due in x days (Angela Lin Ding, Karunya Tota)
+- Request a Book (Robin Sturm) (April Xu) (Vaishali Khandelwal)
+- Pulling Book Data via Google API for auto-fill
+- Click to see who has checked out a book (Ranran Li, Menglin Tian)
 - Styling the entire web page with a theme that matches WCS
 - Functionality to put a book on hold 
 - Hooking up the book stats 
@@ -45,11 +50,30 @@ Low Priority:
 - Solvin the problem of unique copies of the same book 
 - Enter a NetID and see First and Last name pulled from the Illinois Directory
 
+==== Update ====
+
+If you want to get the latest version: 
+
+  git remote add upstream https://github.com/IllinoisWCS/LibraryTracker.git
+
+  git pull upstream master
+  
 ==== Contributors ====
 
-Emily Tran (etran5)
-Emily Chao (elchao96)
-Xue Zou (xuezou3)
-Angela Lin Ding (alding2)
-Eva Shih (eshih3)
-Chenying He (che12)
+- Emily Tran (etran5)
+- Emily Chao (elchao96)
+- Xue Zou (xuezou3)
+- Angela Lin Ding (alding2)
+- Eva Shih (eshih3)
+- Robin Sturm (rsturm2)
+- Ranran Li (rli17)
+- Menglin Tian (mtian6)
+- Chenying He (che12)
+- Jenny Cheng (jrcheng3)
+- Karunya Tota (tota2)
+- April Xu (aprilxu2)
+- Brittany Kane (blkane2)
+- Lily Sellers (lseller2)
+- Nathan Handler (nhandle2)
+- Vaishali Khandelwal (vkhande2)
+

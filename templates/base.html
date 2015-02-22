@@ -5,7 +5,7 @@
 <link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
+<script type="text/python" href="{{ url_for('static', filename='login.py') }}"></script>
 
 <title>WCS Library Tracker</title>
 </head>
@@ -14,6 +14,18 @@
 
 <div class="container">
 <div class="page-home-title">Library Book Tracker</div>
+
+<div class="login-form">
+
+	<label for="username">Username:</label>
+	<input type="text" name="username" />
+
+	<label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+
+    <input type="submit" value="Login">
+
+</div>
 
 <div class="page-home-description">
 WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
@@ -26,11 +38,11 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book here.<br>
 
 <div id="quick-stats-area" class="row">
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">20</span>
+		<span class="quick-stats-number">{{ counter }}</span>
 		<span class="quick-stats-text">Unique Books</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">34</span> 
+		<span class="quick-stats-number">{{ counter }}</span> 
 		<span class="quick-stats-text">Copies of Books Total</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
@@ -38,7 +50,7 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book here.<br>
 		<span class="quick-stats-text">Checked out copies</span>
 	</div> 
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">22</span> 
+		<span class="quick-stats-number">24</span> 
 		<span class="quick-stats-text">Books Available</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
@@ -47,56 +59,14 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book here.<br>
 	</div>
 	<div class="quick-stats-box col-md-2">
 		<span class="quick-stats-number">2</span> 
-		<span class="quick-stats-text">Overdue Books</span>
+		<span class="quick-stats-text"><a href={{ url_for('overdue') }}>Overdue Books</a></span>
+
 	</div>
 </div>
 
-<table class="table table-bordered table-striped">
-	<thead>
-		<tr>
-			<th></th>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Year</th>
-			<th>Available Books</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-ProgrammingInterviewsExposed.jpg') }}" alt="Programming Interviews Exposed"></td>
-			<td>Programming Interviews Exposed</td>
-			<td>John Mongan, Noah Kindler, and Eric Giguere</td>
-			<td>2000</td>
-			<td>2/2</td>
-		</tr>
-
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-CrackingTheCode.jpg') }}" alt="Cracking the Code"></td>
-			<td>Cracking the Coding Interview: 150 Programming Questions and Solutions</td>
-			<td>Gayle Laakmann McDowell</td>
-			<td>2011</td>
-			<td>0/2</td>
-		</tr>
-
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-LeanIn.jpg') }}" alt="Lean In"></td>
-			<td>Lean In: Women, Work, and the Will to Lead</td>
-			<td>Sheryl Sandberg</td>
-			<td>2013</td>
-			<td>4/6</td>
-		</tr>
-
-		<tr>
-			<td><img class="book-preview-image" src="{{ url_for('static', filename='img/Book-DOET.jpg') }}" alt="Lean In"></td>
-			<td>The Design of Everyday Things</td>
-			<td>Don Norman</td>
-			<td>1988</td>
-			<td>1/1</td>
-		</tr>
-
-	</tbody>
-</table>
-
+{% block content -%}
+{% include "books.html" %}
+{%- endblock content %}
 
 <!--<img class="book-preview-image" src="assets/img/Book-CrackingTheCode.jpg" alt="Cracking the Coding Interview">-->
 </div>
