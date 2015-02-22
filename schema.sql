@@ -15,5 +15,3 @@ create table books (
   year integer,
   category text not null
 );
-
-
