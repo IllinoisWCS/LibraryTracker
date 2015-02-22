@@ -50,7 +50,9 @@ def index():
     counter = db.execute('SELECT COUNT(name) FROM books')
     counter = counter.fetchall()[0][0]
     books = cur.fetchall()
-    return render_template('index.html', books=books, counter=counter)
+    availableBooks = db.execute('SELECT COUNT(available) FROM books')
+    availableBooks = availableBooks.fetchall()[0][0]
+    return render_template('index.html', books=books, counter=counter, availableBooks=availableBooks)
 
 if __name__ == '__main__':
     app.run()
