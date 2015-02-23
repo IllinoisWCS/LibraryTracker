@@ -38,7 +38,7 @@ def before_first_request():
 def index():
     books = Book.query.all()
     people = Person.query.all()
-    counter = Book.query(func.count(Book.name)).scalar()
+    counter = Book.query.count()
     return render_template('index.html', books=books, counter=counter)
 
 @app.route('/overdue')
