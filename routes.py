@@ -13,7 +13,7 @@ DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
-SQLALCHEMY_DATABASE_URI = 'postgresql://wcs:wcssuperawesomepassword@localhost:15432/librarytracker'
+SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://wcs:wcssuperawesomepassword@localhost:15432/librarytracker')
 
 # create our little application :)
 app = Flask(__name__)
