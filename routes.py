@@ -17,6 +17,7 @@ SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://wcs:wcssuperaw
 
 # create our little application :)
 app = Flask(__name__)
+app.logger.info('SQLALCHEMY_DATABASE_URI: %s', SQLALCHEMY_DATABASE_URI)
 db = SQLAlchemy(app)
 app.config.from_object(__name__)
 
