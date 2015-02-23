@@ -6,8 +6,6 @@ from sqlalchemy import func
 from contextlib import closing
 import os
 import sys
-import logging
-from logging import StreamHandler
 
 # configuration
 DATABASE = 'LibraryTracker.db'
@@ -19,9 +17,6 @@ SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://wcs:wcssuperaw
 
 # create our little application :)
 app = Flask(__name__)
-file_handler = StreamHandler()
-app.logger.setLevel(logging.DEBUG)
-app.logger.addHandler(file_handler)
 app.logger.info('SQLALCHEMY_DATABASE_URI: %s', SQLALCHEMY_DATABASE_URI)
 db = SQLAlchemy(app)
 app.config.from_object(__name__)
