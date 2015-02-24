@@ -15,9 +15,3 @@ create table books (
   year integer,
   category text not null
 );
-
-drop table if exists requests;
-create table requests(
-bookname text primary key not null,
-
-)
