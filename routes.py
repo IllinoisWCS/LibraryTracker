@@ -4,8 +4,14 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from contextlib import closing
+<<<<<<< HEAD
 import os
 import sys
+=======
+from bs4 import BeautifulSoup
+from flask import request
+import requests as rq
+>>>>>>> 80e540e123101d71aeb5764e3021643d374dc460
 
 # configuration
 DATABASE = 'LibraryTracker.db'
@@ -97,6 +103,24 @@ class Book(db.Model):
 
     def __repr__(self):
         return '<Book %r>' % (self.name)
+
+@app.route('/netidcheck', methods=['POST', 'GET'])
+def netidcheck():
+    return render_template('netidcheck.html')
+
+@app.route('/netidcheck/test', methods=['POST', 'GET'])
+def netidchecktest():
+    if request.method == 'POST':
+        url = "https://illinois.edu/ds/search?skinId=0&sub=&go=go&search=%s&search_type=userid" % request.form['netid']
+        r = rq.get(url)
+        data = r.text
+        soup = BeautifulSoup(data)
+        username = soup.find('h4', 'ws-ds-name detail-title').string
+        print(username)
+        role = soup.find('div', 'role-and-dept').contents[0].string
+        if(not role):
+            role = soup.find('div', 'ws-ds-title').string
+    return render_template('netidtest.html', netid = username, position = role)
 
 if __name__ == '__main__':
     app.run()

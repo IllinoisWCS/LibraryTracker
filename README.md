@@ -48,7 +48,7 @@ High Priority:
 
 Low Priority: 
 - Solvin the problem of unique copies of the same book 
-- Enter a NetID and see First and Last name pulled from the Illinois Directory
+- Enter a NetID and see First and Last name pulled from the Illinois Directory (Han Chen)
 
 ==== Update ====
 
@@ -76,4 +76,5 @@ If you want to get the latest version:
 - Lily Sellers (lseller2)
 - Nathan Handler (nhandle2)
 - Vaishali Khandelwal (vkhande2)
+- Han Chen (hanchen2)
 
