@@ -15,17 +15,15 @@
 <div class="container">
 <div class="page-home-title">Library Book Tracker</div>
 
-<div class="login-form">
 
-	<label for="username">Username:</label>
-	<input type="text" name="username" />
 
-	<label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-
-    <input type="submit" value="Login">
-
-</div>
+  <div class="metanav">
+  {% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
 
 <div class="page-home-description">
 WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>

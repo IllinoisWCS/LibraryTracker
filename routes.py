@@ -67,6 +67,29 @@ def index():
 def overdue():
     return render_template('overdue.html')
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    flash('Blah.')
+    if request.method == 'POST':
+        if request.form['netid'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            flash('Blah 2.')
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('base'))
+    return render_template('login.html', error=error)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You were logged out')
+    return redirect(url_for('base.html'))
+
 if __name__ == '__main__':
     app.run()
 
