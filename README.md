@@ -6,7 +6,7 @@ The goal is to create a useful library tracker web app for both members and offi
 
 ==== Setup Instructions ====
 
-Before you begin please make sure you have mysql, python 2.7, virtualenv and postgreSQL installed on your machine.
+Before you begin please make sure you have mysql, python 2.7, virtualenv, postgreSQL and VirtualBox installed on your machine.
 [The requirements are updated, so make sure you do the following before you run the server. If you don't have postgreSQL, you won't be able to insall all the requirements!]
 
 1. Create and activate your virtual environment: `virtualenv venv && source venv/bin/activate`
