@@ -22,3 +22,4 @@ bookname text primary key not null,
 category text not null,
 author text
 );
+
