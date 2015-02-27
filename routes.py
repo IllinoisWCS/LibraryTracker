@@ -3,6 +3,9 @@ import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
+from bs4 import BeautifulSoup
+from flask import request
+import requests as rq
 
 # configuration
 DATABASE = 'LibraryTracker.db'
@@ -56,6 +59,23 @@ def index():
 def overdue():
     return render_template('overdue.html')
 
+@app.route('/netidcheck', methods=['POST', 'GET'])
+def netidcheck():
+    return render_template('netidcheck.html')
+
+@app.route('/netidcheck/test', methods=['POST', 'GET'])
+def netidchecktest():
+    if request.method == 'POST':
+        url = "https://illinois.edu/ds/search?skinId=0&sub=&go=go&search=%s&search_type=userid" % request.form['netid']
+        r = rq.get(url)
+        data = r.text
+        soup = BeautifulSoup(data)
+        username = soup.find('h4', 'ws-ds-name detail-title').string
+        print(username)
+        role = soup.find('div', 'role-and-dept').contents[0].string
+        if(not role):
+            role = soup.find('div', 'ws-ds-title').string
+    return render_template('netidtest.html', netid = username, position = role)
 
 if __name__ == '__main__':
     app.run()
