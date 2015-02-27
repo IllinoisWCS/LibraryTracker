@@ -4,14 +4,11 @@ from flask import Flask, request, session, g, redirect, url_for, \
 from flask.ext.sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 from contextlib import closing
-<<<<<<< HEAD
 import os
 import sys
-=======
 from bs4 import BeautifulSoup
 from flask import request
 import requests as rq
->>>>>>> 80e540e123101d71aeb5764e3021643d374dc460
 
 # configuration
 DATABASE = 'LibraryTracker.db'
