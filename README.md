@@ -6,7 +6,8 @@ The goal is to create a useful library tracker web app for both members and offi
 
 ==== Setup Instructions ====
 
-Before you begin please make sure you have mysql, python 2.7 and virtualenv installed on your machine.
+Before you begin please make sure you have mysql, python 2.7, virtualenv and postgreSQL installed on your machine.
+[The requirements are updated, so make sure you do the following before you run the server. If you don't have postgreSQL, you won't be able to insall all the requirements!]
 
 1. Create and activate your virtual environment: `virtualenv venv && source venv/bin/activate`
 2. Install all of the requirements using the following command:
@@ -34,20 +35,21 @@ Once done, commit the simple text change back to be merged into the master branc
 
 Sign up for a feature or task to contribute to the project.
 
-High Priority: 
+Tasks:
 
 - Admin login for WCS officers (Brittany Kane, Jenny Cheng)
-- Click to email students with overdue book reminders 
+- Click to email students with overdue book reminders (Add your name please!)
 - Automatically email students with books due in x days (Angela Lin Ding, Karunya Tota)
 - Request a Book (Robin Sturm) (April Xu) (Vaishali Khandelwal)
-- Pulling Book Data via Google API for auto-fill
+- Pulling Book Data via Google API for auto-fill (Han Chen)
 - Click to see who has checked out a book (Ranran Li, Menglin Tian)
-- Styling the entire web page with a theme that matches WCS
+- Styling the entire web page with a theme that matches WCS (Eva Shih)
 - Functionality to put a book on hold 
-- Hooking up the book stats 
-
-Low Priority: 
+- Hooking up the book stats (Please put your names here!)
 - Solvin the problem of unique copies of the same book 
+
+Done:
+- Automatic integration with Herohu (Nathan Handler)
 - Enter a NetID and see First and Last name pulled from the Illinois Directory (Han Chen)
 
 ==== Update ====
