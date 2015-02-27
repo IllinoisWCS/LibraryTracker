@@ -8,11 +8,11 @@ The goal is to create a useful library tracker web app for both members and offi
 
 Before you begin please make sure you have mysql, python 2.7 and virtualenv installed on your machine.
 
-1. Create and activate your virtual environment
+1. Create and activate your virtual environment: `virtualenv venv && source venv/bin/activate`
 2. Install all of the requirements using the following command:
-pip install -r requirements.txt
-3. Run the server using the following command:
-python routes.py
+`pip install -r requirements.txt`
+3. Spin up Vagrant VM for Postgresql: `vagrant up`
+3. Run the server using the following command: `foreman start`
 
 If you add or remove packages please remember to use the following command so that it's reflected when other people pull:
 pip freeze > requirements.txt
