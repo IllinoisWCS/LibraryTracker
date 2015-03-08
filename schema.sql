@@ -20,6 +20,6 @@ create table books (
 drop table if exists requests;
 create table requests(
 bookname text primary key not null,
-category text not null,
+category text,
 author text
 );

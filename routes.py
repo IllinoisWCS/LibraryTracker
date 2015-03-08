@@ -71,12 +71,12 @@ def requestbook():
         flash('New entry was successfully posted')
         return render_template('requestedbooks.html')
 
-@app.route('request/show')
+@app.route('/request/show')
 def showrequests():
     db = get_db()
     cur = db.execute('select * from requests')
-    return render_template('requestedbooks.html')
-
+    requests = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
+    return render_template('requestedbooks.html', requests = requests)
 
 @app.route('/overdue')
 def overdue():
