@@ -10,7 +10,8 @@ create table books (
   id integer primary key autoincrement,
   name text not null,
   authors text not null,
-  available text not null,
+  available integer,
+  numberOfCopies integer,
   cover text not null,
   year integer,
   category text not null

@@ -44,7 +44,7 @@ High Priority:
 - Click to see who has checked out a book (Ranran Li, Menglin Tian)
 - Styling the entire web page with a theme that matches WCS
 - Functionality to put a book on hold 
-- Hooking up the book stats 
+- Hooking up the book stats (Claire Miller, Chenying He)
 
 Low Priority: 
 - Solvin the problem of unique copies of the same book 
@@ -76,4 +76,5 @@ If you want to get the latest version:
 - Lily Sellers (lseller2)
 - Nathan Handler (nhandle2)
 - Vaishali Khandelwal (vkhande2)
+- Claire Miller (ctmille2)
 

@@ -47,12 +47,13 @@ def teardown_request(exception):
 def index():
     db = get_db()
     cur = db.execute('select * from books')
-    counter = db.execute('SELECT COUNT(name) FROM books')
-    counter = counter.fetchall()[0][0]
+    unique = db.execute('SELECT COUNT(name) FROM books')
+    unique = unique.fetchall()[0][0]
     books = cur.fetchall()
     availableBooks = db.execute('SELECT COUNT(available) FROM books')
     availableBooks = availableBooks.fetchall()[0][0]
-    return render_template('index.html', books=books, counter=counter, availableBooks=availableBooks)
+    checkedOut = unique - availableBooks
+    return render_template('index.html', books=books, unique=unique, availableBooks=availableBooks, checkedOut=checkedOut)
 
 @app.route('/overdue')
 def overdue():
