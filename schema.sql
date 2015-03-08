@@ -16,3 +16,10 @@ create table books (
   year integer,
   category text
 );
+
+drop table if exists requests;
+create table requests(
+bookname text primary key not null,
+category text not null,
+author text
+);
