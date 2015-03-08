@@ -113,8 +113,6 @@ def booklookupapicall():
     url = 'https://www.googleapis.com/books/v1/volumes?' + encoded_args
     response = urllib2.urlopen(url)
     data = json.load(response)
-    #print json.dumps(data, indent=4, sort_keys=True)
-    print data['items'][0]['volumeInfo']['industryIdentifiers'][0]
     return jsonify(data)
 
 @app.route('/netidcheck', methods=['POST', 'GET'])
