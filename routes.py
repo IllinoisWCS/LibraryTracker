@@ -1,10 +1,10 @@
 # all the imports
 import sqlite3
-from flask import Flask, request, session, g, redirect, url_for, \
+from flask import Flask, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from bs4 import BeautifulSoup
-from flask import request
+from flask import request as req
 import requests as rq
 
 # configuration
@@ -65,7 +65,7 @@ def request():
     
 def add_entry():
     db.execute('insert into entries (title, text) values (? ?)',
-                 [request.form['title'], request.form['text']])
+                 [req.form['title'], req.form['text']])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
@@ -78,10 +78,10 @@ def overdue():
 def login():
     error = None
     flash('Blah.')
-    if request.method == 'POST':
-        if request.form['netid'] != app.config['USERNAME']:
+    if req.method == 'POST':
+        if req.form['netid'] != app.config['USERNAME']:
             error = 'Invalid username'
-        elif request.form['password'] != app.config['PASSWORD']:
+        elif req.form['password'] != app.config['PASSWORD']:
             error = 'Invalid password'
         else:
             flash('Blah 2.')
@@ -104,8 +104,8 @@ def netidcheck():
 
 @app.route('/netidcheck/test', methods=['POST', 'GET'])
 def netidchecktest():
-    if request.method == 'POST':
-        url = "https://illinois.edu/ds/search?skinId=0&sub=&go=go&search=%s&search_type=userid" % request.form['netid']
+    if req.method == 'POST':
+        url = "https://illinois.edu/ds/search?skinId=0&sub=&go=go&search=%s&search_type=userid" % req.form['netid']
         r = rq.get(url)
         data = r.text
         soup = BeautifulSoup(data)
