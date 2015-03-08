@@ -19,15 +19,15 @@
 
   <div class="metanav">
   {% if not session.logged_in %}
-    <a href="{{ url_for('login') }}">log in</a>
+    <a href={{ url_for('login') }}>log in</a>
   {% else %}
-    <a href="{{ url_for('logout') }}">log out</a>
+    <a href={{ url_for('logout') }}>log out</a>
   {% endif %}
   </div>
 
 <div class="page-home-description">
 WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
-We from 2PM - 3PM, Monday Through Friday. Request a new book <A HREF="requestabook.html">here</A>.<br> 
+We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('request') }}>here</a>.<br> 
 </div>
 
 
