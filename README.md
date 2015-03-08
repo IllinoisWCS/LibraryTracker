@@ -6,14 +6,13 @@ The goal is to create a useful library tracker web app for both members and offi
 
 ==== Setup Instructions ====
 
-Before you begin please make sure you have mysql, python 2.7, virtualenv, postgreSQL and VirtualBox installed on your machine.
-[The requirements are updated, so make sure you do the following before you run the server. If you don't have postgreSQL, you won't be able to insall all the requirements!]
+Before you begin please make sure you have mysql, python 2.7 and virtualenv installed on your machine.
 
-1. Create and activate your virtual environment: `virtualenv venv && source venv/bin/activate`
+1. Create and activate your virtual environment
 2. Install all of the requirements using the following command:
-`pip install -r requirements.txt`
-3. Spin up Vagrant VM for Postgresql: `vagrant up`
-3. Run the server using the following command: `foreman start`
+pip install -r requirements.txt
+3. Run the server using the following command:
+python routes.py
 
 If you add or remove packages please remember to use the following command so that it's reflected when other people pull:
 pip freeze > requirements.txt
@@ -35,21 +34,20 @@ Once done, commit the simple text change back to be merged into the master branc
 
 Sign up for a feature or task to contribute to the project.
 
-Tasks:
+High Priority: 
 
 - Admin login for WCS officers (Brittany Kane, Jenny Cheng)
-- Click to email students with overdue book reminders (Add your name please!)
+- Click to email students with overdue book reminders 
 - Automatically email students with books due in x days (Angela Lin Ding, Karunya Tota)
 - Request a Book (Robin Sturm) (April Xu) (Vaishali Khandelwal)
-- Pulling Book Data via Google API for auto-fill (Han Chen)
+- Pulling Book Data via Google API for auto-fill
 - Click to see who has checked out a book (Ranran Li, Menglin Tian)
-- Styling the entire web page with a theme that matches WCS (Eva Shih)
+- Styling the entire web page with a theme that matches WCS
 - Functionality to put a book on hold 
-- Hooking up the book stats (Please put your names here!)
-- Solvin the problem of unique copies of the same book 
+- Hooking up the book stats (Claire Miller, Chenying He)
 
-Done:
-- Automatic integration with Heroku (Nathan Handler)
+Low Priority: 
+- Solvin the problem of unique copies of the same book 
 - Enter a NetID and see First and Last name pulled from the Illinois Directory (Han Chen)
 
 ==== Update ====
@@ -79,4 +77,5 @@ If you want to get the latest version:
 - Nathan Handler (nhandle2)
 - Vaishali Khandelwal (vkhande2)
 - Han Chen (hanchen2)
+- Claire Miller (ctmille2)
 

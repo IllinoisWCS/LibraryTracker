@@ -1,21 +1,13 @@
 # all the imports
+import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
-<<<<<<< HEAD
      abort, render_template, flash
-from flask.ext.sqlalchemy import SQLAlchemy
-from sqlalchemy import func
-=======
-     abort, render_template, flash, jsonify
->>>>>>> netid
 from contextlib import closing
-import os
-import sys
 from bs4 import BeautifulSoup
 import requests as rq
 import urllib2
 import urllib
 import json
-
 
 # configuration
 DATABASE = 'LibraryTracker.db'
@@ -23,44 +15,62 @@ DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
-SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://wcs:wcssuperawesomepassword@localhost:15432/librarytracker')
 
 # create our little application :)
 app = Flask(__name__)
-app.logger.info('SQLALCHEMY_DATABASE_URI: %s', SQLALCHEMY_DATABASE_URI)
-db = SQLAlchemy(app)
 app.config.from_object(__name__)
 
 app.config.from_envvar("FLASKR_SETTINGS", silent=True)
 
-@app.before_first_request
-def before_first_request():
-    app.logger.info('Creating Database Tables...')
-    try:
-        db.create_all()
-        app.logger.info('Database Tables Created!')
-    except Exception, e:
-        app.logger.error('There was an error connecting or creating the tables in the database. Terminating...\n %s', e)
-        sys.exit(1)
+def connect_db():
+    rv = sqlite3.connect(app.config['DATABASE'])
+    rv.row_factory = sqlite3.Row
+    return rv
+
+def get_db():
+    if not hasattr(g, "sqlite_db"):
+        g.sqlite_db = connect_db()
+    return g.sqlite_db
+
+def init_db():
+    with closing(connect_db()) as db:
+        with app.open_resource('schema.sql', mode='r') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+
+@app.before_request
+def before_request():
+    g.db = connect_db()
+
+@app.teardown_request
+def teardown_request(exception):
+    db = getattr(g, 'db', None)
+    if db is not None:
+        db.close()
+
+@app.route('/')
+def index():
+    db = get_db()
+    cur = db.execute('select * from books')
+    unique = db.execute('SELECT COUNT(name) FROM books')
+    unique = unique.fetchall()[0][0]
+    books = cur.fetchall()
+    availableBooks = db.execute('SELECT COUNT(available) FROM books')
+    availableBooks = availableBooks.fetchall()[0][0]
+    checkedOut = unique - availableBooks
+    return render_template('index.html', books=books, unique=unique, availableBooks=availableBooks, checkedOut=checkedOut)
 
 
-@app.route('/request', methods=['POST'])
+@app.route('/request')
 def request():
     return render_template('requestabook.html')
     
 def add_entry():
-    g.db.execute('insert into entries (title, text) values (? ?)',
+    db.execute('insert into entries (title, text) values (? ?)',
                  [request.form['title'], request.form['text']])
-    g.db.commit()
+    db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
-
-@app.route('/')
-def index():
-    books = Book.query.all()
-    people = Person.query.all()
-    counter = Book.query.count()
-    return render_template('index.html', books=books, counter=counter)
 
 @app.route('/overdue')
 def overdue():
@@ -89,24 +99,6 @@ def logout():
     flash('You were logged out')
     return redirect(url_for('base.html'))
 
-class Person(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    netid = db.Column(db.String(8), index=True, unique=True)
-    password = db.Column(db.String(120))
-
-    def __repr__(self):
-        return '<Person %r>' % (self.netid)
-
-class Book(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120))
-    authors = db.Column(db.String(120))
-    available = db.Column(db.String(120))
-    cover = db.Column(db.String(120))
-    year = db.Column(db.Integer)
-
-    def __repr__(self):
-        return '<Book %r>' % (self.name)
 
 @app.route('/booklookup')
 def booklookup():
@@ -145,4 +137,3 @@ def netidchecktest():
 
 if __name__ == '__main__':
     app.run()
-

@@ -19,15 +19,15 @@
 
   <div class="metanav">
   {% if not session.logged_in %}
-    <a href="{{ url_for('login') }}">log in</a>
+    <a href={{ url_for('login') }}>log in</a>
   {% else %}
-    <a href="{{ url_for('logout') }}">log out</a>
+    <a href={{ url_for('logout') }}>log out</a>
   {% endif %}
   </div>
 
 <div class="page-home-description">
 WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
-We from 2PM - 3PM, Monday Through Friday. Request a new book <A HREF="requestabook.html">here</A>.<br> 
+We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('request') }}>here</a>.<br> 
 </div>
 
 
@@ -36,19 +36,19 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book <A HREF="requestabo
 
 <div id="quick-stats-area" class="row">
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ counter }}</span>
+		<span class="quick-stats-number">{{ unique }}</span>
 		<span class="quick-stats-text">Unique Books</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ counter }}</span> 
+		<span class="quick-stats-number">{{ unique }}</span> 
 		<span class="quick-stats-text">Copies of Books Total</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">12</span> 
+		<span class="quick-stats-number">{{ checkedOut }}</span> 
 		<span class="quick-stats-text">Checked out copies</span>
 	</div> 
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">24</span> 
+		<span class="quick-stats-number">{{ availableBooks }}</span> 
 		<span class="quick-stats-text">Books Available</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
