@@ -59,13 +59,13 @@ def index():
 @app.route('/request')
 def request():
     return render_template('requestabook.html')
-    
-def add_entry():
-    db.execute('insert into entries (title, text) values (? ?)',
-                 [request.form['title'], request.form['text']])
-    db.commit()
-    flash('New entry was successfully posted')
-    return redirect(url_for('show_entries'))
+
+@app.route('/request/book', methods = ['POST'])
+def requestbook():
+    g.db.execute('insert into requests')
+    g.db.commit()
+    return redirect(url_for('requestabook.html'))
+
 
 @app.route('/overdue')
 def overdue():

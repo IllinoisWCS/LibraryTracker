@@ -14,5 +14,5 @@ create table books (
   available integer not null,
   cover text not null,
   year integer,
-  category text not null
+  category text
 );
