@@ -1,11 +1,14 @@
 # all the imports
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, \
-     abort, render_template, flash
+     abort, render_template, flash, jsonify
 from contextlib import closing
 from bs4 import BeautifulSoup
-from flask import request
 import requests as rq
+import urllib2
+import urllib
+import json
+
 
 # configuration
 DATABASE = 'LibraryTracker.db'
@@ -59,23 +62,40 @@ def index():
 def overdue():
     return render_template('overdue.html')
 
+@app.route('/booklookup')
+def booklookup():
+    return render_template('booklookup.html');
+
+@app.route('/booklookup/apicall', methods=['POST'])
+def booklookupapicall():
+    book_name = request.form['bookname']
+    query_args = {'q': book_name}
+    encoded_args = urllib.urlencode(query_args)
+    print(encoded_args)
+    url = 'https://www.googleapis.com/books/v1/volumes?' + encoded_args
+    response = urllib2.urlopen(url)
+    data = json.load(response)
+    #print json.dumps(data, indent=4, sort_keys=True)
+    print data['items'][0]['volumeInfo']['industryIdentifiers'][0]
+    return jsonify(data)
+
 @app.route('/netidcheck', methods=['POST', 'GET'])
 def netidcheck():
     return render_template('netidcheck.html')
 
-@app.route('/netidcheck/test', methods=['POST', 'GET'])
+@app.route('/netidcheck/test', methods=['POST'])
 def netidchecktest():
-    if request.method == 'POST':
-        url = "https://illinois.edu/ds/search?skinId=0&sub=&go=go&search=%s&search_type=userid" % request.form['netid']
-        r = rq.get(url)
-        data = r.text
-        soup = BeautifulSoup(data)
-        username = soup.find('h4', 'ws-ds-name detail-title').string
-        print(username)
-        role = soup.find('div', 'role-and-dept').contents[0].string
-        if(not role):
-            role = soup.find('div', 'ws-ds-title').string
-    return render_template('netidtest.html', netid = username, position = role)
+
+    url = "https://illinois.edu/ds/search?skinId=0&sub=&go=go&search=%s&search_type=userid" % request.form['netid']
+    r = rq.get(url)
+    data = r.text
+    soup = BeautifulSoup(data)
+    username = soup.find('h4', 'ws-ds-name detail-title').string
+    role = soup.find('div', 'role-and-dept').contents[0].string
+    if(not role):
+        role = soup.find('div', 'ws-ds-title').string
+        return "Welcome! " + username
+    return "Hello, " + role + " " + username
 
 if __name__ == '__main__':
     app.run()
