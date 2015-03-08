@@ -4,7 +4,7 @@ from flask import Flask, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from bs4 import BeautifulSoup
-from flask import request as req
+from flask import request 
 import requests as rq
 
 # configuration
@@ -60,7 +60,7 @@ def index():
 
 
 @app.route('/request', methods = ['POST', 'GET'])
-def request():
+def reqst():
     return render_template('requestabook.html')
 
 @app.route('/request/book', methods = ['POST', 'GET'])
