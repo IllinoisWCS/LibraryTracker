@@ -69,7 +69,7 @@ def requestbook():
         g.db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
         g.db.commit()
         flash('New entry was successfully posted')
-        return render_template('requestedbooks.html')
+        return redirect(url_for('showrequests'))
 
 @app.route('/request/show')
 def showrequests():
