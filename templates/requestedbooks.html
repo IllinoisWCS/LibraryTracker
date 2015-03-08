@@ -1,0 +1,19 @@
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Author</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for request in requests %}
+		<tr>
+			<td>{{ request.bookname }}</td>
+			<td>{{ request.category }}</td>
+			<td>{{ request.author }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

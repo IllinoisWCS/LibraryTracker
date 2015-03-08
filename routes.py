@@ -59,15 +59,23 @@ def index():
     return render_template('index.html', books=books, unique=unique, availableBooks=availableBooks, checkedOut=checkedOut)
 
 
-@app.route('/request')
+@app.route('/request', methods = ['POST', 'GET'])
 def request():
     return render_template('requestabook.html')
 
-@app.route('/request/book', methods = ['POST'])
+@app.route('/request/book', methods = ['POST', 'GET'])
 def requestbook():
-    g.db.execute('insert into requests')
-    g.db.commit()
-    return redirect(url_for('requestabook.html'))
+    if request.method == 'POST':
+        g.db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
+        g.db.commit()
+        flash('New entry was successfully posted')
+        return render_template('requestedbooks.html')
+
+@app.route('request/show')
+def showrequests():
+    db = get_db()
+    cur = db.execute('select * from requests')
+    return render_template('requestedbooks.html')
 
 
 @app.route('/overdue')
