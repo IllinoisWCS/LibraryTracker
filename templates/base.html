@@ -15,21 +15,19 @@
 <div class="container">
 <div class="page-home-title">Library Book Tracker</div>
 
-<div class="login-form">
 
-	<label for="username">Username:</label>
-	<input type="text" name="username" />
 
-	<label for="password">Password:</label>
-    <input type="password" id="password" name="password">
-
-    <input type="submit" value="Login">
-
-</div>
+  <div class="metanav">
+  {% if not session.logged_in %}
+    <a href={{ url_for('login') }}>log in</a>
+  {% else %}
+    <a href={{ url_for('logout') }}>log out</a>
+  {% endif %}
+  </div>
 
 <div class="page-home-description">
 WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
-We from 2PM - 3PM, Monday Through Friday. Request a new book here.<br> 
+We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('request') }}>here</a>.<br> 
 </div>
 
 
@@ -38,19 +36,19 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book here.<br>
 
 <div id="quick-stats-area" class="row">
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ counter }}</span>
+		<span class="quick-stats-number">{{ unique }}</span>
 		<span class="quick-stats-text">Unique Books</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ counter }}</span> 
+		<span class="quick-stats-number">{{ total }}</span> 
 		<span class="quick-stats-text">Copies of Books Total</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">12</span> 
+		<span class="quick-stats-number">{{ total-availableBooks }}</span> 
 		<span class="quick-stats-text">Checked out copies</span>
 	</div> 
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">24</span> 
+		<span class="quick-stats-number">{{ availableBooks }}</span> 
 		<span class="quick-stats-text">Books Available</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
