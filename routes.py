@@ -1,7 +1,7 @@
 
 # all the imports
 import sqlite3
-from flask import Flask, session, g, redirect, url_for, \
+from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from bs4 import BeautifulSoup
