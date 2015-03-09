@@ -4,7 +4,7 @@ from flask import Flask, jsonify, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from bs4 import BeautifulSoup
-from flask import request as req
+from flask import request 
 import requests as rq
 import urllib2
 import urllib
@@ -62,16 +62,24 @@ def index():
     return render_template('index.html', books=books, unique=unique, availableBooks=availableBooks, checkedOut=checkedOut)
 
 
-@app.route('/request')
-def request():
+@app.route('/request', methods = ['POST', 'GET'])
+def reqst():
     return render_template('requestabook.html')
-    
-def add_entry():
-    db.execute('insert into entries (title, text) values (? ?)',
-                 [req.form['title'], req.form['text']])
-    db.commit()
-    flash('New entry was successfully posted')
-    return redirect(url_for('show_entries'))
+
+@app.route('/request/book', methods = ['POST', 'GET'])
+def requestbook():
+    if request.method == 'POST':
+        g.db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
+        g.db.commit()
+        flash('New entry was successfully posted')
+        return redirect(url_for('showrequests'))
+
+@app.route('/request/show')
+def showrequests():
+    db = get_db()
+    cur = db.execute('select * from requests')
+    requests = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
+    return render_template('requestedbooks.html', requests = requests)
 
 @app.route('/overdue')
 def overdue():
