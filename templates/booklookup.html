@@ -1,0 +1,51 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.post("/booklookup/apicall", {bookname: $("#book").val()}, function(data, status){
+			var bookHandler = Handlebars.compile($("#ajax-books").html());
+			$("#bookTable").html(bookHandler(data));
+		})
+	})
+})
+</script>
+{% raw %}
+<script id="ajax-books" type="text/x-handlebars-template">
+	{{#if items.length}}
+	<thead>
+		<tr>
+			<td> Book Name </td>
+			<td> Author </td>
+			<td> Description </td>
+			<td> Cover </td>
+			<td> ISBN </td>
+		</tr>
+	</thead>
+	<tbody id="bookInfo">
+		{{#each items}}
+		<tr>
+			<td>{{volumeInfo.title}}</td>
+			<td>{{volumeInfo.authors}}</td>
+			<td>{{volumeInfo.description}}</td>
+			<td><img src={{volumeInfo.imageLinks.smallThumbnail}}></td>
+			{{#if volumeInfo.industryIdentifiers.length}}
+				<td>{{volumeInfo.industryIdentifiers.0.type}}: {{volumeInfo.industryIdentifiers.0.identifier}}</td>
+			{{else}}
+				<td>No ISBN Found</td>
+			{{/if}}
+		</tr>
+		{{/each}}
+	</tbody>
+	{{else}}
+	<div>No Book Found</div>
+	{{/if}}
+</script>
+{% endraw %}
+<p>Book Name: <input type="text" id="book" name="bookname"></p>
+<button>Search</button>
+</form>
+<table class="table" id="bookTable">
+</table>

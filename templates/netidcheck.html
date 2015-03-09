@@ -1,4 +1,14 @@
-<form action="/netidcheck/test" method="post">
-  NetID: <input type="text" name="netid"><br>
-  <input type="submit" value="Submit">
-</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	$("button").click(function(){
+		$.post("/netidcheck/test", {netid: $("#netid").val()}, function(data, status){
+			$("#welcome").text(data);
+		});
+	});
+});
+</script>
+
+<p id="welcome">Hello Guest!</p>
+<p>NetID: <input type="text" id="netid" name="netid"></p>
+<button>Submit</button>
