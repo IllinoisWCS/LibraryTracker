@@ -61,7 +61,7 @@ If you want to get the latest version:
 ==== Contributors ====
 
 - Emily Tran (etran5)
-- Emily Chao (elchao96)
+- Emily Chao (elchao2)
 - Xue Zou (xuezou3)
 - Angela Lin Ding (alding2)
 - Eva Shih (eshih3)
