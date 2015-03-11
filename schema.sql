@@ -14,12 +14,12 @@ create table books (
   available integer not null,
   cover text not null,
   year integer,
-  category text not null
+  category text
 );
 
 drop table if exists requests;
-create table requests(
-bookname text primary key not null,
-category text not null,
-author text
+create table requests (
+  bookname text primary key,
+  category text,
+  author text
 );

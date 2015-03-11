@@ -27,7 +27,7 @@
 
 <div class="page-home-description">
 WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
-We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('request') }}>here</a>.<br> 
+We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('reqst') }}>here</a>.<br> 
 </div>
 
 
@@ -40,11 +40,11 @@ We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for(
 		<span class="quick-stats-text">Unique Books</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ total }}</span> 
+		<span class="quick-stats-number">{{ unique }}</span> 
 		<span class="quick-stats-text">Copies of Books Total</span>
 	</div>
 	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ total-availableBooks }}</span> 
+		<span class="quick-stats-number">{{ checkedOut }}</span> 
 		<span class="quick-stats-text">Checked out copies</span>
 	</div> 
 	<div class="quick-stats-box col-md-2">

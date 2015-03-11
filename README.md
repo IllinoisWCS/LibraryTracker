@@ -40,7 +40,7 @@ High Priority:
 - Click to email students with overdue book reminders 
 - Automatically email students with books due in x days (Angela Lin Ding, Karunya Tota)
 - Request a Book (Robin Sturm) (April Xu) (Vaishali Khandelwal)
-- Pulling Book Data via Google API for auto-fill
+- Pulling Book Data via Google API for auto-fill (Han Chen)[DONE]
 - Click to see who has checked out a book (Ranran Li, Menglin Tian)
 - Styling the entire web page with a theme that matches WCS
 - Functionality to put a book on hold 
@@ -48,7 +48,7 @@ High Priority:
 
 Low Priority: 
 - Solvin the problem of unique copies of the same book 
-- Enter a NetID and see First and Last name pulled from the Illinois Directory (Han Chen)
+- Enter a NetID and see First and Last name pulled from the Illinois Directory (Han Chen)[DONE]
 
 ==== Update ====
 
@@ -61,7 +61,7 @@ If you want to get the latest version:
 ==== Contributors ====
 
 - Emily Tran (etran5)
-- Emily Chao (elchao96)
+- Emily Chao (elchao2)
 - Xue Zou (xuezou3)
 - Angela Lin Ding (alding2)
 - Eva Shih (eshih3)
