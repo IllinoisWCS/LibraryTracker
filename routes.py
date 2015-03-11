@@ -56,10 +56,31 @@ def index():
     unique = db.execute('SELECT COUNT(name) FROM books')
     unique = unique.fetchall()[0][0]
     books = cur.fetchall()
-    availableBooks = db.execute('SELECT COUNT(available) FROM books')
-    availableBooks = availableBooks.fetchall()[0][0]
-    checkedOut = unique - availableBooks
-    return render_template('index.html', books=books, unique=unique, availableBooks=availableBooks, checkedOut=checkedOut)
+
+    arr1=[]
+    arr2=[]
+    count1 = 0
+    count2 = 0
+
+    for book in books:
+        available = book['available']
+        copies = book['copies']
+        
+        arr1.append(available)
+        arr2.append(copies)
+
+
+    for member in arr1:
+        count1 += member
+
+
+    for mbr in arr2:
+        count2 += mbr
+
+    availableBooks = count1
+    copies = count2
+    checkedOut = copies - availableBooks
+    return render_template('index.html', books=books, unique=unique, copies=copies, availableBooks=availableBooks, checkedOut=checkedOut)
 
 
 @app.route('/request', methods = ['POST', 'GET'])
