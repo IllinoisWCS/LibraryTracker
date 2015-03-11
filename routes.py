@@ -62,11 +62,11 @@ def index():
     count2 = 0
 
     for book in books:
-        available = book[3]
-        temp = available.split('/')
+        copies = book['available']
+        available = book['copies']
         
-        arr1.append(int(temp[0]))
-        arr2.append(int(temp[1]))
+        arr1.append(copies)
+        arr2.append(available)
 
 
     for member in arr1:
