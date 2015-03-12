@@ -23,3 +23,12 @@ create table requests (
   category text,
   author text
 );
+
+drop table if exists reservations;
+create table reservations (
+  id integer primary key autoincrement,
+  netid text not null,
+  bookid integer not null,
+  startdate DATETIME not null,
+  returned integer not null
+);

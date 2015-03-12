@@ -80,6 +80,7 @@ def index():
     availableBooks = count1
     copies = count2
     checkedOut = copies - availableBooks
+
     return render_template('index.html', books=books, unique=unique, copies=copies, availableBooks=availableBooks, checkedOut=checkedOut)
 
 
@@ -89,9 +90,10 @@ def reqst():
 
 @app.route('/request/book', methods = ['POST', 'GET'])
 def requestbook():
+    db = get_db()
     if request.method == 'POST':
-        g.db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
-        g.db.commit()
+        db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
+        db.commit()
         flash('New entry was successfully posted')
         return redirect(url_for('showrequests'))
 
@@ -104,6 +106,11 @@ def showrequests():
 
 @app.route('/overdue')
 def overdue():
+    # INSERT INTO reservations (netid, bookid, startdate, returned) VALUES ('testuser', 1, DATETIME('now'), 0);
+    db = get_db()
+    cur = db.execute('select * from reservations\
+        where returned = 0 and abs(datediff(startdate, DATETIME("now"))>7')
+    overdue = fetchall()
     return render_template('overdue.html')
 
 @app.route('/login', methods=['GET', 'POST'])
