@@ -2,8 +2,8 @@
 <html>
 <head>
 
-<title>Request A Book!</title>
-
+<title>Request A Book</title>
+<h1>Request A Book! </h1>
 <form action="/request/book" method="post">
 	Book Name: <br>
 	<input type="text" name="bookname"> 
@@ -19,14 +19,33 @@
 	</select>
 	<br><br>
 	Author: <br>
-	<input type="text" name="author" value="optional">
+	<input type="text" name="author">
 	<br>
 	<input type="submit" value="Submit">
 	<br>
 </form>
+
 </head>
 
-<body>
+<table>
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Author</th>
+		</tr>
+	</thead>
 
-</body>
+	<tbody>
+		<ul class=requests>
+		{% for request in requests %}
+		<tr>
+			<td>{{ request.bookname }}</td>
+			<td>{{ request.category }}</td>
+			<td>{{ request.author }}</td>
+		</tr>
+	</u1>
+		{% endfor %}
+	</tbody>
+</table>
 </html>

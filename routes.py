@@ -84,8 +84,11 @@ def index():
 
 
 @app.route('/request', methods = ['POST', 'GET'])
-def reqst():
-    return render_template('requestabook.html')
+def showrequests():
+    db = get_db()
+    cur = db.execute('select bookname, category, author from requests')
+    requests = [dict(bookname=row[0], category=row[1], author=row[2]) for row in cur.fetchall()]
+    return render_template('requestabook.html', requests = requests)
 
 @app.route('/request/book', methods = ['POST', 'GET'])
 def requestbook():
@@ -95,12 +98,12 @@ def requestbook():
         flash('New entry was successfully posted')
         return redirect(url_for('showrequests'))
 
-@app.route('/request/show')
+'''@app.route('/request/show')
 def showrequests():
     db = get_db()
-    cur = db.execute('select * from requests')
+    cur = db.execute('select bookname, category, author from requests')
     requests = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
-    return render_template('requestedbooks.html', requests = requests)
+    return render_template('requestedbooks.html', requests = requests)'''
 
 @app.route('/overdue')
 def overdue():
