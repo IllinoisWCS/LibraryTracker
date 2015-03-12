@@ -1,8 +1,14 @@
 <!DOCTYPE html>
+<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <html>
+<center>
 <head>
 
-<title>Request A Book!</title>
+<title>Request A Book</title>
+<h1>Request A Book! </h1>
+<h3>Request a book that you think we should add to the library</h3>
 
 <form action="/request/book" method="post">
 	Book Name: <br>
@@ -15,18 +21,40 @@
 		<option value="Design">Design</option>
 		<option value="Language">Language</option>
 		<option value="Leadership">Leadership</option>
+		<option value="Fiction">Fiction</option>
 		<option value="Other">Other</option>
 	</select>
 	<br><br>
 	Author: <br>
-	<input type="text" name="author" value="optional">
-	<br>
+	<input type="text" name="author">
+	<br><br>
 	<input type="submit" value="Submit">
 	<br>
 </form>
+
+<h2> Current Requests</h2>
 </head>
 
-<body>
+<table border = "1", width = "50%">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Author</th>
+		</tr>
+	</thead>
 
-</body>
+	<tbody>
+		<ul class=requests>
+		{% for request in requests %}
+		<tr>
+			<td>{{ request.bookname }}</td>
+			<td>{{ request.category }}</td>
+			<td>{{ request.author }}</td>
+		</tr>
+	</u1>
+		{% endfor %}
+	</tbody>
+</table>
+</center>
 </html>

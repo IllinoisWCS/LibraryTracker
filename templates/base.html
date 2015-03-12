@@ -15,8 +15,6 @@
 	<div class="container">
 		<div class="page-home-title">Library Book Tracker</div>
 
-
-
 		<div class="metanav">
 			{% if not session.logged_in %}
 			<a href={{ url_for('login') }}>log in</a>
@@ -27,12 +25,10 @@
 
 		<div class="page-home-description">
 			WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
-			We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('reqst') }}>here</a>.<br> 
+			We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('showrequests') }}>here</a>.<br> 
 		</div>
 
-
 		<div class="page-home-title">Quick Stats</div>
-
 
 		<div id="quick-stats-area" class="row">
 			<div class="quick-stats-box col-md-2">
@@ -67,6 +63,7 @@
 		{%- endblock content %}
 
 		<!--<img class="book-preview-image" src="assets/img/Book-CrackingTheCode.jpg" alt="Cracking the Coding Interview">-->
+
 	</div>
 
 </body>
