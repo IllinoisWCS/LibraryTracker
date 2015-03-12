@@ -4,11 +4,13 @@ from flask import Flask, jsonify, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from bs4 import BeautifulSoup
-from flask import request 
+from flask import request as req
 import requests as rq
 import urllib2
 import urllib
 import json
+from flask.ext.mail import Mail
+from flask.ext.mail import Message
 
 # configuration
 DATABASE = 'LibraryTracker.db'
@@ -22,6 +24,8 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 app.config.from_envvar("FLASKR_SETTINGS", silent=True)
+
+mail = Mail(app)
 
 def connect_db():
     rv = sqlite3.connect(app.config['DATABASE'])
@@ -91,7 +95,7 @@ def reqst():
 @app.route('/request/book', methods = ['POST', 'GET'])
 def requestbook():
     db = get_db()
-    if request.method == 'POST':
+    if req.method == 'POST':
         db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
         db.commit()
         flash('New entry was successfully posted')
@@ -106,12 +110,26 @@ def showrequests():
 
 @app.route('/overdue')
 def overdue():
-    # INSERT INTO reservations (netid, bookid, startdate, returned) VALUES ('testuser', 1, DATETIME('now'), 0);
+    # INSERT INTO reservations (netid, bookid, bookname, startdate, returned) VALUES ('xuezou3', 1, 'Programming Interviews Exposed', DATETIME('now'), 0);
     db = get_db()
     cur = db.execute('select * from reservations\
-        where returned = 0 and abs(datediff(startdate, DATETIME("now"))>7')
-    overdue = fetchall()
-    return render_template('overdue.html')
+        where returned = 0 and abs(julianday(startdate)-julianday(DATETIME("now")))>7')
+    overdue = cur.fetchall()
+    return render_template('overdue.html', overdue=overdue)
+
+@app.route('/remindEmail')
+def remindEmail():
+    db = get_db()
+    cur = db.execute('select * from reservations\
+        where returned = 0 and abs(julianday(startdate)-julianday(DATETIME("now")))>7')
+    overdue = cur.fetchall()
+    for item in overdue:
+        content = "You have overdue book(s): " + item[3] + ". Please return as quick as possible!"
+        msg = Message(content,
+                  sender="meownway@gmail.com",
+                  recipients=[item[1]+"@illinois.edu"])
+        mail.send(msg)
+    return render_template('overdue.html', overdue=overdue)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

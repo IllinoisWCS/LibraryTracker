@@ -29,6 +29,7 @@ create table reservations (
   id integer primary key autoincrement,
   netid text not null,
   bookid integer not null,
+  bookname text not null,
   startdate DATETIME not null,
   returned integer not null
 );

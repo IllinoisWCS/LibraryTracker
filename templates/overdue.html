@@ -1,40 +1,43 @@
 <HTML>
-<head>
-	<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<head>
+		<link href={{ url_for('static', filename='bootstrap/css/bootstrap.css') }} rel="stylesheet">
+		<link rel="stylesheet" href={{ url_for('static', filename='style.css') }}>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
-	<title>WCS Library Tracker</title>
-</head>
-<body>
-	<table>
-	<table style="width:100%">
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Author</th>
-				<th>Checked Out To</th>
-				<th>Days Overdue</th>
-				<th>Email Reminder</th>
-			</tr>
-		</thead>
+		<title>WCS Library Tracker</title>
+	</head>
 
-		<tbody>
-			<tr>
-				<td>Programming Interviews Exposed</td>
-				<td>John Mongan, Noah Kindler, and Eric Giquere</td>
-				<td>alding2</td>
-				<td>5</td>
-				<td><a href="">Email</a></td>
-			</tr>
+	<body>
+		<a href={{ url_for('remindEmail')}}>Remind all</a>
+		<table>
+			<table style="width:100%">
+				<thead>
+					<tr>
+						<th>Book Name</th>
+						<th>Checked Out To</th>
+						<th>Checkout Date</th>
+					</tr>
+				</thead>
 
-		</tbody>
-	</table>
+				<tbody>
+					{% for item in overdue %}
+					<tr>
+						<td>{{ item.bookname }}</td>
+						<td>
+							<a href="mailto:{{item.netid}}@illinois.edu?
+							Subject=WCS%20Overdue%20Book&body=Greetings,%0A%0A%20%20%20%20You%20have%20an%20overdue%20book:%20{{item.bookname}}.%20Please%20return%20this%20book%20as%20soon%20as%20you%20can.%0A%0ABest,%0AWCS%20Tech%20Team" target="_top">{{ ''+ item.netid }}</a>
+						</td>
+						<td>{{ item.startdate }}</td>
+					</tr>
+					{% endfor %}
 
-	</table>
+				</tbody>
+			</table>
 
-</body>
+		</table>
 
-<!--Book title, author, Person/netID, Days overdue, send reminder email-->
+	</body>
+
+	<!--Book title, author, Person/netID, Days overdue, send reminder email-->
 
 </HTML>
