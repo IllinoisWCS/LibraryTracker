@@ -2,75 +2,75 @@
 <html>
 <head>
 
-<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<script type="text/python" href="{{ url_for('static', filename='login.py') }}"></script>
+	<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/python" href="{{ url_for('static', filename='login.py') }}"></script>
 
-<title>WCS Library Tracker</title>
+	<title>WCS Library Tracker</title>
 </head>
 
 <body>
 
-<div class="container">
-<div class="page-home-title">Library Book Tracker</div>
+	<div class="container">
+		<div class="page-home-title">Library Book Tracker</div>
 
 
 
-  <div class="metanav">
-  {% if not session.logged_in %}
-    <a href={{ url_for('login') }}>log in</a>
-  {% else %}
-    <a href={{ url_for('logout') }}>log out</a>
-  {% endif %}
-  </div>
+		<div class="metanav">
+			{% if not session.logged_in %}
+			<a href={{ url_for('login') }}>log in</a>
+			{% else %}
+			<a href={{ url_for('logout') }}>log out</a>
+			{% endif %}
+		</div>
 
-<div class="page-home-description">
-WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
-We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('reqst') }}>here</a>.<br> 
-</div>
-
-
-<div class="page-home-title">Quick Stats</div>
+		<div class="page-home-description">
+			WCS Library Books can be checked out 2 weeks at a time at any office hours.<br>
+			We from 2PM - 3PM, Monday Through Friday. Request a new book <a href={{ url_for('reqst') }}>here</a>.<br> 
+		</div>
 
 
-<div id="quick-stats-area" class="row">
-	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ unique }}</span>
-		<span class="quick-stats-text">Unique Books</span>
+		<div class="page-home-title">Quick Stats</div>
+
+
+		<div id="quick-stats-area" class="row">
+			<div class="quick-stats-box col-md-2">
+				<span class="quick-stats-number">{{ unique }}</span>
+				<span class="quick-stats-text">Unique Books</span>
+			</div>
+			<div class="quick-stats-box col-md-2">
+				<span class="quick-stats-number">{{ copies }}</span> 
+				<span class="quick-stats-text">Copies of Books Total</span>
+			</div>
+			<div class="quick-stats-box col-md-2">
+				<span class="quick-stats-number">{{ checkedOut }}</span> 
+				<span class="quick-stats-text">Checked out copies</span>
+			</div> 
+			<div class="quick-stats-box col-md-2">
+				<span class="quick-stats-number">{{ availableBooks }}</span> 
+				<span class="quick-stats-text">Books Available</span>
+			</div>
+			<div class="quick-stats-box col-md-2">
+				<span class="quick-stats-number">14 Days</span>
+				<span class="quick-stats-text">Avg Checkout Time</span>
+			</div>
+			<div class="quick-stats-box col-md-2">
+				<span class="quick-stats-number">2</span> 
+				<span class="quick-stats-text"><a href={{ url_for('overdue') }}>Overdue Books</a></span>
+
+			</div>
+		</div>
+
+		{% block content -%}
+		{% include "books.html" %}
+		{%- endblock content %}
+
+		<!--<img class="book-preview-image" src="assets/img/Book-CrackingTheCode.jpg" alt="Cracking the Coding Interview">-->
 	</div>
-	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ copies }}</span> 
-		<span class="quick-stats-text">Copies of Books Total</span>
-	</div>
-	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ checkedOut }}</span> 
-		<span class="quick-stats-text">Checked out copies</span>
-	</div> 
-	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">{{ availableBooks }}</span> 
-		<span class="quick-stats-text">Books Available</span>
-	</div>
-	<div class="quick-stats-box col-md-2">
-			<span class="quick-stats-number">14 Days</span>
-			<span class="quick-stats-text">Avg Checkout Time</span>
-	</div>
-	<div class="quick-stats-box col-md-2">
-		<span class="quick-stats-number">2</span> 
-		<span class="quick-stats-text"><a href={{ url_for('overdue') }}>Overdue Books</a></span>
-
-	</div>
-</div>
-
-{% block content -%}
-{% include "books.html" %}
-{%- endblock content %}
-
-<!--<img class="book-preview-image" src="assets/img/Book-CrackingTheCode.jpg" alt="Cracking the Coding Interview">-->
-</div>
 
 </body>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}">
 </script>
 

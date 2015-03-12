@@ -8,9 +8,9 @@
 	</head>
 
 	<body>
-		<a href={{ url_for('remindEmail')}}>Remind all</a>
-		<table>
-			<table style="width:100%">
+		<div class="container">
+			<!-- <a href={{ url_for('remindEmail')}}>Remind all</a> -->
+			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
 						<th>Book Name</th>
@@ -30,12 +30,9 @@
 						<td>{{ item.startdate }}</td>
 					</tr>
 					{% endfor %}
-
 				</tbody>
 			</table>
-
-		</table>
-
+		</div>
 	</body>
 
 	<!--Book title, author, Person/netID, Days overdue, send reminder email-->
