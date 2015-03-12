@@ -98,13 +98,6 @@ def requestbook():
         flash('New entry was successfully posted')
         return redirect(url_for('showrequests'))
 
-'''@app.route('/request/show')
-def showrequests():
-    db = get_db()
-    cur = db.execute('select bookname, category, author from requests')
-    requests = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
-    return render_template('requestedbooks.html', requests = requests)'''
-
 @app.route('/overdue')
 def overdue():
     return render_template('overdue.html')
