@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script type="text/python" href="{{ url_for('static', filename='login.py') }}"></script>
+
+	<title>WCS Library Tracker</title>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="page-home-title">
+			You requested to reserve <i>{{ bookname }}</i>. 
+			<br>
+			Please enter your netid.
+			<form action="/reserve/{{bookid}}/{{bookname}}" method="post">
+				<input type="text" name="netid"> 
+				<input type="submit" value="Submit">
+				<br>
+			</form>
+		</div>
+
+	</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}">
+</script>
+
+</html>
