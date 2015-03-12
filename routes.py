@@ -95,7 +95,7 @@ def showrequests():
 def requestbook():
     db = get_db()
     if req.method == 'POST':
-        db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [request.form['bookname'], request.form['categories'], request.form['author']])
+        db.execute('insert into requests(bookname, category, author) values (?, ?, ?)', [req.form['bookname'], req.form['categories'], req.form['author']])
         db.commit()
         flash('New entry was successfully posted')
         return redirect(url_for('showrequests'))
