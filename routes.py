@@ -69,7 +69,6 @@ def index():
         arr1.append(available)
         arr2.append(copies)
 
-
     for member in arr1:
         count1 += member
 
@@ -99,6 +98,20 @@ def requestbook():
         db.commit()
         flash('New entry was successfully posted')
         return redirect(url_for('showrequests'))
+
+@app.route('/reserve/<int:bookid>/<bookname>', methods = ['POST', 'GET'])
+def reserve(bookid, bookname):
+    db = get_db()
+    if req.method == 'POST':
+        cur = db.execute('select * from reservations where netid = ? and bookid = ?', [req.form['netid'], bookid])
+        if len(cur.fetchall())==0:
+            db.execute('insert into reservations(netid, bookid, bookname, startdate, returned) values (?, ?, ?, DATETIME("now"), ?)', [req.form['netid'], bookid, bookname, 0])
+            db.execute('update books set available=available-1 where id = ? and available > 0', [bookid])
+            db.commit()
+            return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
+    return render_template('reserve.html', bookid=bookid, bookname=bookname)
 
 @app.route('/overdue')
 def overdue():

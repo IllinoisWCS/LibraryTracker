@@ -15,7 +15,13 @@
 			<td>{{ book.name }}</td>
 			<td>{{ book.authors }}</td>
 			<td>{{ book.year }}</td>
-			<td>{{ book.available }}</td>
+			<td>
+				{% if book.available > 0 %}
+				<a href={{ url_for('reserve', bookid=book.id, bookname=book.name) }}>Reserve</a>
+				{% else %}
+				Sorry, all copies are checked out :(
+				{% endif %}
+			</td>
 		</tr>
 		{% endfor %}
 
@@ -32,5 +38,5 @@ INSERT INTO books (name, authors, copies, available, cover, year, category) VALU
 INSERT INTO users (netid, password) VALUES ('testuser','testpass');
 
 -->
-	</tbody>
+</tbody>
 </table>
