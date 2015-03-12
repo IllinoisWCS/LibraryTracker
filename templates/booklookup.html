@@ -2,50 +2,81 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js"></script>
+<script type="text/javascript" src="http://books.google.com/books/previewlib.js"></script>
+<script>
+$(document).ready(function(){
+	$("#book").keypress(function(e){
+		if(e.which == 13){
+			$.post("/booklookup/apicall", {bookname: $("#book").val()}, function(data, status){
+				var bookHandler = Handlebars.compile($("#ajax-books").html());
+				$("#bookTable").html(bookHandler(data));
+			});
+		}
+	});	
+});
+</script>
 <script>
 $(document).ready(function(){
 	$("button").click(function(){
 		$.post("/booklookup/apicall", {bookname: $("#book").val()}, function(data, status){
 			var bookHandler = Handlebars.compile($("#ajax-books").html());
 			$("#bookTable").html(bookHandler(data));
-		})
-	})
-})
+		});
+	});
+});
 </script>
 {% raw %}
+<script>
+Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+  if(v1 === v2) {
+    return options.fn(this);
+  }
+  return options.inverse(this);
+});
+</script>
 <script id="ajax-books" type="text/x-handlebars-template">
-	{{#if items.length}}
-	<thead>
-		<tr>
-			<td> Book Name </td>
-			<td> Author </td>
-			<td> Description </td>
-			<td> Cover </td>
-			<td> ISBN </td>
-		</tr>
-	</thead>
-	<tbody id="bookInfo">
-		{{#each items}}
-		<tr>
-			<td>{{volumeInfo.title}}</td>
-			<td>{{volumeInfo.authors}}</td>
-			<td>{{volumeInfo.description}}</td>
+{{#if items.length}}
+<thead>
+	<tr>
+		<td> Book Name </td>
+		<td> Author </td>
+		<td> Description </td>
+		<td> Cover </td>
+		<td> ISBN </td>
+		<td> Preview </td>
+	</tr>
+</thead>
+<tbody id="bookInfo">
+	{{#each items}}
+	<tr>
+		<td>{{volumeInfo.title}}</td>
+		<td>{{volumeInfo.authors}}</td>
+		<td>{{volumeInfo.description}}</td>
+		{{#if volumeInfo.imageLinks.smallThumbnail.length}}
 			<td><img src={{volumeInfo.imageLinks.smallThumbnail}}></td>
-			{{#if volumeInfo.industryIdentifiers.length}}
-				<td>{{volumeInfo.industryIdentifiers.0.type}}: {{volumeInfo.industryIdentifiers.0.identifier}}</td>
-			{{else}}
-				<td>No ISBN Found</td>
-			{{/if}}
-		</tr>
-		{{/each}}
-	</tbody>
-	{{else}}
-	<div>No Book Found</div>
-	{{/if}}
+		{{else}}
+			<td><img src="/static/img/No_image_available.png"></td>
+		{{/if}}				
+		{{#if volumeInfo.industryIdentifiers.length}}
+			<td>{{volumeInfo.industryIdentifiers.0.type}}: {{volumeInfo.industryIdentifiers.0.identifier}}</td>
+		{{else}}
+			<td>No ISBN Found</td>
+		{{/if}}
+		{{#ifCond accessInfo.accessViewStatus "NONE"}}
+			<td><button type="button" class="btn btn-default" disabled="disabled">Not Available</button></td>
+		{{else}}
+			<td><a href={{volumeInfo.previewLink}} class="btn btn-primary" role="button">Available</a></td>
+		{{/ifCond}}		
+	</tr>
+	{{/each}}
+</tbody>
+{{else}}
+<div>No Book Found</div>
+{{/if}}
 </script>
 {% endraw %}
 <p>Book Name: <input type="text" id="book" name="bookname"></p>
 <button>Search</button>
 </form>
-<table class="table" id="bookTable">
+<table class="table table-hover" id="bookTable">
 </table>
