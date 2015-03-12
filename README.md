@@ -45,7 +45,7 @@ High Priority:
 - Styling the entire web page with a theme that matches WCS
 - Functionality to put a book on hold 
 - Hooking up the book stats (Claire Miller, Chenying He)
-- Reservation and update overdue (Violet Zou)
+- Reservation and update overdue (Han Chen, Violet Zou) [DONE]
 
 Low Priority: 
 - Solvin the problem of unique copies of the same book 
